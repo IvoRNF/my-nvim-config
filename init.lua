@@ -58,6 +58,6 @@ require("telescope").setup {
 
 require("nvim-tree").setup {
   view = {
-    width = 50,
+    width = 70,
   },
 }
