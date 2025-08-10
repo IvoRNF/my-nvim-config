@@ -36,24 +36,28 @@ vim.schedule(function()
   require "mappings"
 end)
 
-require('telescope').setup({
+require("telescope").setup {
   defaults = {
     path_display = { "filename_first" }, -- Example: Display filename first
     -- Or: path_display = { "truncate" },
     -- Or: path_display = { "smart" },
     layout_strategy = "horizontal",
-        layout_config = {
-          horizontal = {
-            prompt_position = "top",
-            width = { padding = 0 },
-            height = { padding = 0 },
-            preview_width = 0.5,
-          },
-        },
- 
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+        width = { padding = 0 },
+        height = { padding = 0 },
+        preview_width = 0.5,
+      },
+    },
   },
-})
-
+}
 
 -- require'lspconfig'.tsserver.setup {}
 -- require'lspconfig'.ts_ls.setup {}
+
+require("nvim-tree").setup {
+  view = {
+    width = 50,
+  },
+}
