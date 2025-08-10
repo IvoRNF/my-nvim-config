@@ -1,0 +1,18 @@
+1 - install nvim 
+2 - install nvchad ( if icons not showing download an font from https://www.nerdfonts.com/font-downloads and install on terminal)
+3 - install lsp server for ts - sudo npm install -g typescript typescript-language-server
+
+ --- lsp sem client nativo 
+   4 - adicione a linha abaixo em ~/.config/nvim/lua/plugins/lsp.lua ou ~/.config/nvim/init.lua
+   require'lspconfig'.tsserver.setup {}
+   5 - usar lspconfig.ts_ls.setup({}) ao inves do acima 
+ --- lsp com client nativo 
+
+ adicionar o plugin abaixo em ~/.config/nvim/lua/plugins/init.lua , se o plugin acima estiver instalado , comentar.
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    ft = { "typescript", "typescriptreact" },
+    opts = {}, -- Configure as needed
+  },
+
