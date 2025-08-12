@@ -61,3 +61,10 @@ require("nvim-tree").setup {
     width = 70,
   },
 }
+
+
+require('lspconfig').clangd.setup {
+  -- Optional: Add custom settings for clangd
+  capabilities = require('cmp_nvim_lsp').default_capabilities(), -- If using nvim-cmp
+  -- Other clangd-specific settings
+}
