@@ -19,36 +19,39 @@ return {
     ft = { "javascript", "typescript", "typescriptreact" },
     opts = {
 
-    servers = {
-      vtsls = {
-        settings = {
-          typescript = {
-            tsserver = {
-              maxTsServerMemory = 8192 
+      servers = {
+        vtsls = {
+          settings = {
+            typescript = {
+              tsserver = {
+                maxTsServerMemory = 8192,
+              },
             },
           },
         },
       },
-    },
-
-
-  }, -- Configure as needed
+    }, -- Configure as needed
   },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-       "html", "css", "scss"
-  		},
-  	},
-  },{
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "scss",
+      },
+    },
+  },
+  {
     "nvim-treesitter/nvim-treesitter-angular",
-    ft = { "html" }
+    ft = { "html" },
+  },
 
-  }
 }
