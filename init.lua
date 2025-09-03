@@ -55,8 +55,12 @@ require("telescope").setup {
 
 
 require 'lspconfig'.ts_ls.setup {
-  cmd = { "typescript-language-server", "--stdio" }
-
+  -- cmd = { "typescript-language-server", "--stdio" }
+  cmd = {
+    "tsgo",
+    "--lsp",
+    "--stdio"
+  }
 }
 
 require("nvim-tree").setup {
