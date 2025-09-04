@@ -56,7 +56,7 @@ require("telescope").setup {
 
 require 'lspconfig'.ts_ls.setup {
   -- cmd = { "typescript-language-server", "--stdio" }
-  name = 'ts_go_lsp',
+  name = 'ts_go',
   cmd = {
     "tsgo",
     "--lsp",
