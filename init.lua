@@ -61,6 +61,11 @@ require 'lspconfig'.ts_ls.setup {
     "tsgo",
     "--lsp",
     "--stdio"
+  },
+  filetypes = {
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
   }
 }
 
