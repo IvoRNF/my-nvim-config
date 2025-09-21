@@ -10,7 +10,7 @@ map("i", "jk", "<ESC>")
 map("x", "<C-c>", '"+y', { desc = "Copy to clipboard" })
 
 map({ "n" }, "<leader>w", function()
-  vim.lsp.buf.format { async = false }
+  -- vim.lsp.buf.format { async = false }
   vim.cmd('write')
 end, { desc = "format then save" })
 

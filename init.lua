@@ -52,11 +52,8 @@ require("telescope").setup {
     },
   },
 }
-
-
-require 'lspconfig'.ts_ls.setup {
+vim.lsp.config('ts_ls', {
   -- cmd = { "typescript-language-server", "--stdio" }
-  name = 'ts_go',
   cmd = {
     "tsgo",
     "--lsp",
@@ -67,7 +64,9 @@ require 'lspconfig'.ts_ls.setup {
     "typescriptreact",
     "typescript.tsx",
   }
-}
+})
+
+vim.lsp.enable('ts_ls');
 
 require("nvim-tree").setup {
   view = {
@@ -79,8 +78,10 @@ require("nvim-tree").setup {
 }
 
 
-require('lspconfig').clangd.setup {
+vim.lsp.config('clangd', {
   -- Optional: Add custom settings for clangd
   capabilities = require('cmp_nvim_lsp').default_capabilities(), -- If using nvim-cmp
   -- Other clangd-specific settings
-}
+})
+
+vim.lsp.enable('clangd');
