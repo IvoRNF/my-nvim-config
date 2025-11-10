@@ -52,6 +52,16 @@ require("telescope").setup {
     },
   },
 }
+
+require("mason-lspconfig").setup({
+  ensure_installed = {},
+  automatic_installation = false,
+  automatic_setup = false,
+  automatic_enable = false,
+  handlers = nil
+})
+
+
 vim.lsp.config('ts_ls', {
   -- cmd = { "typescript-language-server", "--stdio" }
   cmd = {
@@ -59,6 +69,7 @@ vim.lsp.config('ts_ls', {
     "--lsp",
     "--stdio"
   },
+  -- cmd = { "lspgo" },
   filetypes = {
     "typescript",
     "typescriptreact",

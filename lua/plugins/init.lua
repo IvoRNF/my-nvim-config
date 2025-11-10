@@ -7,31 +7,41 @@ return {
 
   -- These are some examples, uncomment them if you want to see them work!
   {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
+  },
+
+  {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
     end,
   },
 
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    ft = { "javascript" },
-    opts = {
 
-      servers = {
-        vtsls = {
-          settings = {
-            typescript = {
-              tsserver = {
-                maxTsServerMemory = 8192,
-              },
-            },
-          },
-        },
-      },
-    }, -- Configure as needed
-  },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   ft = { "javascript" },
+  --   opts = {
+  --
+  --     servers = {
+  --       vtsls = {
+  --         settings = {
+  --           typescript = {
+  --             tsserver = {
+  --               maxTsServerMemory = 8192,
+  --             },
+  --           },
+  --         },
+  --       },
+  --     },
+  --   }, -- Configure as needed
+  -- },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
