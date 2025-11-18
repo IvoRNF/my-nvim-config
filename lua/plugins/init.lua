@@ -4,8 +4,14 @@ return {
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
-
-  -- These are some examples, uncomment them if you want to see them work!
+  {
+    "github/copilot.vim",
+    lazy = false,
+    config = function() -- Mapping tab is already used in NvChad
+      vim.g.copilot_no_tab_map = true -- Disable tab mapping
+      vim.g.copilot_assume_mapped = true -- Assume that the mapping is already done
+    end,
+  }, -- These are some examples, uncomment them if you want to see them work!
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {},
@@ -21,7 +27,6 @@ return {
       require "configs.lspconfig"
     end,
   },
-
 
   -- {
   --   "pmizio/typescript-tools.nvim",
@@ -70,7 +75,7 @@ return {
       "BufNewFile",
     },
     config = function()
-      local lint = require("lint")
+      local lint = require "lint"
 
       lint.linters_by_ft = {
         javascript = { "eslint_d" },
@@ -97,7 +102,7 @@ return {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- Format before saving the buffer
     config = function()
-      require("conform").setup({
+      require("conform").setup {
         formatters_by_ft = {
           javascript = { "prettier" },
           typescript = { "prettier" },
@@ -107,7 +112,7 @@ return {
           timeout_ms = 3000,
           lsp_fallback = true,
         },
-      })
+      }
     end,
-  }
+  },
 }

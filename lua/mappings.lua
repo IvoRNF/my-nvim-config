@@ -11,11 +11,14 @@ map("x", "<C-c>", '"+y', { desc = "Copy to clipboard" })
 
 map({ "n" }, "<leader>w", function()
   -- vim.lsp.buf.format { async = false }
-  vim.cmd('write')
+  vim.cmd "write"
 end, { desc = "format then save" })
 
 map({ "n", "v" }, "<leader>fs", function()
   require("telescope.builtin").grep_string()
 end, { desc = "Telescope Grep String (current word/selection)" })
 
+map({ "i" }, "<leader>k", function()
+  vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
+end, { desc = "Copilot Accept", noremap = true, silent = true })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
