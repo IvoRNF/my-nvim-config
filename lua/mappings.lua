@@ -12,6 +12,7 @@ map("x", "<C-c>", '"+y', { desc = "Copy to clipboard" })
 map({ "n" }, "<leader>w", function()
   -- vim.lsp.buf.format { async = false }
   vim.cmd "write"
+  vim.cmd "!yarn run change"
 end, { desc = "format then save" })
 
 map({ "n", "v" }, "<leader>fs", function()
