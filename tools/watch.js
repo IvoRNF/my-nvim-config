@@ -1,10 +1,6 @@
-// "build:fast": "tsgo -p tsconfig-tsgo.json && tsc-alias && cp ./src/dictionaries/ dist/dictionaries -r",
-// "start:dev": "node ./watch.js",
-// "change": "echo foo > change.signal",
-
-const fs = require("fs");
-const { execSync, spawn } = require("child_process");
-const fname = "./change.signal";
+const fs = require('fs');
+const { execSync, spawn } = require('child_process');
+const fname = './change.signal';
 
 async function main() {
   if (!fs.existsSync(fname)) {
@@ -12,11 +8,18 @@ async function main() {
   }
   while (true) {
     if (fs.existsSync(fname)) {
-      console.log("building...");
-      const output = execSyncCommand("yarn build:fast");
-      output && console.log(output.toString());
-      fs.unlinkSync(fname);
-      startCommand();
+      console.log('building...');
+      try {
+        const output = execSyncCommand('yarn build:fast');
+        if (output) {
+          console.log(output.toString());
+          startCommand();
+        }
+      } catch (err) {
+        process.stdout.write(err.stdout);
+      } finally {
+        fs.unlinkSync(fname);
+      }
     }
 
     await new Promise((resolve, reject) => {
@@ -26,16 +29,16 @@ async function main() {
 }
 
 function startCommand() {
-  const fnamePid = "./pid";
+  const fnamePid = './pid';
   if (fs.existsSync(fnamePid)) {
     const pid = Number(fs.readFileSync(fnamePid).toString());
     try {
       process.kill(-pid);
       child = null;
-      console.log("killed");
+      console.log('killed');
     } catch (err) {}
   }
-  const child = spawnCommand("yarn", ["start"]);
+  const child = spawnCommand('yarn', ['start']);
   fs.writeFileSync(fnamePid, child.pid.toString());
   return child;
 }
@@ -44,33 +47,15 @@ function spawnCommand(command, args) {
   const childProcess = spawn(command, args, {
     detached: true,
   });
-  childProcess.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-  });
-
-  childProcess.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
-  });
-
-  childProcess.on("close", (code) => {
-    console.log(`child process exited with code ${code}`);
-  });
+  childProcess.stdout.pipe(process.stdout);
+  childProcess.stderr.pipe(process.stderr);
   return childProcess;
 }
 
 function execSyncCommand(command) {
   return execSync(command, (error, stdout, stderr) => {
-    if (stdout) {
-      console.log(stdout);
-    }
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-    if (stderr) {
-      console.error(`stderr: ${stderr}`);
-    }
-    console.log(`stdout: ${stdout}`);
+    stdout.pipe(process.stdout);
+    stderr.pipe(process.stderr);
   });
 }
 
