@@ -3,7 +3,8 @@ vim.g.mapleader = " "
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
+-- error format for typescript
+vim.opt.errorformat = "%+A %#%f %#(%l\\,%c): %m,%C%m"
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
@@ -53,31 +54,30 @@ require("telescope").setup {
   },
 }
 
-require("mason-lspconfig").setup({
+require("mason-lspconfig").setup {
   ensure_installed = {},
   automatic_installation = false,
   automatic_setup = false,
   automatic_enable = false,
-  handlers = nil
-})
+  handlers = nil,
+}
 
-
-vim.lsp.config('ts_ls', {
+vim.lsp.config("ts_ls", {
   -- cmd = { "typescript-language-server", "--stdio" }
   cmd = {
     "tsgo",
     "--lsp",
-    "--stdio"
+    "--stdio",
   },
   -- cmd = { "lspgo" },
   filetypes = {
     "typescript",
     "typescriptreact",
     "typescript.tsx",
-  }
+  },
 })
 
-vim.lsp.enable('ts_ls');
+vim.lsp.enable "ts_ls"
 
 require("nvim-tree").setup {
   view = {
@@ -88,11 +88,10 @@ require("nvim-tree").setup {
   },
 }
 
-
-vim.lsp.config('clangd', {
+vim.lsp.config("clangd", {
   -- Optional: Add custom settings for clangd
-  capabilities = require('cmp_nvim_lsp').default_capabilities(), -- If using nvim-cmp
+  capabilities = require("cmp_nvim_lsp").default_capabilities(), -- If using nvim-cmp
   -- Other clangd-specific settings
 })
 
-vim.lsp.enable('clangd');
+vim.lsp.enable "clangd"
